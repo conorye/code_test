@@ -322,7 +322,7 @@
         ssize_t  read_count;
 
 
-        read_count = read( file,
+        read_count = r`ad( file,
                            stream->base + total_read_count,
                            stream->size - total_read_count );
 

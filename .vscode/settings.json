@@ -1,0 +1,19 @@
+{
+    "files.associations": {
+        "ft2build.h": "c",
+        "fcntl.h": "c",
+        "ioctl.h": "c",
+        "cstddef": "c",
+        "*.tcc": "c",
+        "fstream": "c",
+        "iosfwd": "c",
+        "istream": "c",
+        "limits": "c",
+        "sstream": "c",
+        "streambuf": "c",
+        "unistd.h": "c",
+        "algorithm": "c"
+    },
+    "cmake.sourceDirectory": "/home/book/nfs_rootfs/code_test/10_freetype/freetype-2.10.2",
+    "C_Cpp.errorSquiggles": "disabled"
+}

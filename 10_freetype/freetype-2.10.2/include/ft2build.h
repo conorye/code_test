@@ -1,3 +1,12 @@
+/*
+ * @Author: yc && qq747339545@163.com
+ * @Date: 2025-01-14 11:27:34
+ * @LastEditTime: 2025-02-05 15:15:00
+ * @FilePath: /code_test/10_freetype/freetype-2.10.2/include/ft2build.h
+ * @Description: 
+ * 
+ * Copyright (c) 2025 by ${git_name_email}, All Rights Reserved. 
+ */
 /****************************************************************************
  *
  * ft2build.h
