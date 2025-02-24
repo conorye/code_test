@@ -12,7 +12,9 @@
         "sstream": "c",
         "streambuf": "c",
         "unistd.h": "c",
-        "algorithm": "c"
+        "algorithm": "c",
+        "tslib-filter.h": "c",
+        "fbutils.h": "c"
     },
     "cmake.sourceDirectory": "/home/book/nfs_rootfs/code_test/10_freetype/freetype-2.10.2",
     "C_Cpp.errorSquiggles": "disabled"
