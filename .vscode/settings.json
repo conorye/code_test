@@ -14,7 +14,11 @@
         "unistd.h": "c",
         "algorithm": "c",
         "tslib-filter.h": "c",
-        "fbutils.h": "c"
+        "fbutils.h": "c",
+        "iterator": "c",
+        "random": "c",
+        "functional": "c",
+        "memory": "c"
     },
     "cmake.sourceDirectory": "/home/book/nfs_rootfs/code_test/10_freetype/freetype-2.10.2",
     "C_Cpp.errorSquiggles": "disabled"
