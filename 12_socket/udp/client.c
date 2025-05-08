@@ -1,3 +1,12 @@
+/*
+ * @Author: yc && qq747339545@163.com
+ * @Date: 2025-03-01 17:17:00
+ * @LastEditTime: 2025-04-24 11:28:31
+ * @FilePath: /code_test/12_socket/udp/client.c
+ * @Description: 
+ * 
+ * Copyright (c) 2025 by ${git_name_email}, All Rights Reserved. 
+ */
 #include <sys/types.h>          /* See NOTES */
 #include <sys/socket.h>
 #include <string.h>
@@ -52,9 +61,9 @@ int main(int argc, char **argv)
 
 	while (1)
 	{
-		if (fgets(ucSendBuf, 999, stdin))
+		if (fgets((char *)ucSendBuf, 999, stdin))
 		{
-			iSendLen = send(iSocketClient, ucSendBuf, strlen(ucSendBuf), 0);
+			iSendLen = send(iSocketClient, (const char *)ucSendBuf, strlen((const char *)ucSendBuf), 0);
 			if (iSendLen <= 0)
 			{
 				close(iSocketClient);

@@ -1,7 +1,7 @@
 /*
  * @Author: yc && qq747339545@163.com
  * @Date: 2025-03-01 17:17:00
- * @LastEditTime: 2025-03-02 11:26:57
+ * @LastEditTime: 2025-03-15 12:00:35
  * @FilePath: /code_test/12_socket/tcp/server.c
  * @Description: 
  * 
@@ -46,38 +46,49 @@ int main(int argc, char **argv)
 	
 	iSocketServer = socket(AF_INET, SOCK_STREAM, 0);
 	if (-1 == iSocketServer)
-	{
+	{+-
 		printf("socket error!\n");
 		return -1;
 	}
 
 	tSocketServerAddr.sin_family      = AF_INET;
+	// `htons` 函数将主机字节序（host byte order）转换为网络字节序（network byte order），因为不同的计算机体系结构可能使用不同的字节序，
+	//而网络传输通常使用大端字节序（big-endian）。`SERVER_PORT` 是一个宏或常量，表示服务器监听的端口号。
 	tSocketServerAddr.sin_port        = htons(SERVER_PORT);  /* host to net, short */
- 	tSocketServerAddr.sin_addr.s_addr = INADDR_ANY;
+ 	
+	//设置 IP 地址为 `192.168.5.11`，表示服务器将绑定到指定的网络接口。
+	// 这意味着服务器可以接收发送到该 IP 地址的连接请求。
+	// tSocketServerAddr.sin_addr.s_addr = INADDR_ANY;
+	tSocketServerAddr.sin_addr.s_addr = inet_addr("192.168.5.11");
 	memset(tSocketServerAddr.sin_zero, 0, 8);
 	
 	iRet = bind(iSocketServer, (const struct sockaddr *)&tSocketServerAddr, sizeof(struct sockaddr));
-	if (-1 == iRet)
+	if (-1 == iRet) 
 	{
-		printf("bind error!\n");
+		perror("bind failed");  // 输出具体errno描述 
+		fprintf(stderr, "[DEBUG] Attempting to bind to %s:%d\n", 
+			   inet_ntoa(tSocketServerAddr.sin_addr),  
+			   ntohs(tSocketServerAddr.sin_port)); 
 		return -1;
 	}
-
+	// `listen` 函数将服务器端的 socket 设置为监听模式，等待客户端的连接请求。
 	iRet = listen(iSocketServer, BACKLOG);
 	if (-1 == iRet)
-	{
+	{	
+		// 这里只是监听启动失败
 		printf("listen error!\n");
 		return -1;
 	}
 
 	while (1)
 	{
-		iAddrLen = sizeof(struct sockaddr);
+		socklen_t iAddrLen = sizeof(struct sockaddr_in);
 		iSocketClient = accept(iSocketServer, (struct sockaddr *)&tSocketClientAddr, &iAddrLen);
 		if (-1 != iSocketClient)
-		{
+		{	//增加客户端计数并打印客户端信息（ip地址）
 			iClientNum++;
 			printf("Get connect from client %d : %s\n",  iClientNum, inet_ntoa(tSocketClientAddr.sin_addr));
+			//创建子进程处理客户端通信
 			if (!fork())
 			{
 				/* 子进程的源码 */

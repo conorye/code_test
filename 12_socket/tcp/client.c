@@ -1,7 +1,7 @@
 /*
  * @Author: yc && qq747339545@163.com
  * @Date: 2025-03-01 17:17:00
- * @LastEditTime: 2025-03-02 11:19:50
+ * @LastEditTime: 2025-03-14 15:52:46
  * @FilePath: /code_test/12_socket/tcp/client.c
  * @Description: 
  * 
@@ -49,6 +49,9 @@ int main(int argc, char **argv)
 		printf("invalid server_ip\n");
 		return -1;
 	}
+	//填充 于将 `tSocketServerAddr` 结构体中的 `sin_zero` 字段的所有字节设置为 0
+	//in_zero` 是 `sockaddr_in` 结构体中的一个字符数组，通常用于填充，使 `sockaddr_in` 结构体的大小与 `sockaddr` 结构体一致。
+	// 尽管在大多数情况下这个字段不会被使用，但将其初始化为 0 是一个良好的编程习惯
 	memset(tSocketServerAddr.sin_zero, 0, 8);
 
 
@@ -60,7 +63,8 @@ int main(int argc, char **argv)
 	}
 
 	while (1)
-	{
+	{	
+		//fgets 函数从标准输入（stdin）（也就是我们可以在终端里写）读取最多 999 个字符，并将其存储在 ucSendBuf 缓冲区中。
 		if (fgets(ucSendBuf, 999, stdin))
 		{
 			iSendLen = send(iSocketClient, ucSendBuf, strlen(ucSendBuf), 0);
